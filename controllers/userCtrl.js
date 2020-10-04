@@ -2,8 +2,6 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 
-// ADD TOKEN
-
 // POST : /api/auth/signup 
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
