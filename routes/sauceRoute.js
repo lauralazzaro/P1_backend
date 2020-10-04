@@ -14,10 +14,10 @@ router.get('/:id', sauceCtrl.getOneSauce);
 router.post('', sauceCtrl.createSauce);
 
 // UDPDATE SAUCE ENTRY 
-router.put(':id', sauceCtrl.updateSauce);
+router.put('/:id', sauceCtrl.updateSauce);
 
 // DELETE ONE SAUCE
-router.delete(':id', sauceCtrl.deleteSauce);
+router.delete('/:id', sauceCtrl.deleteSauce);
 
 // ADD LIKES OR DISLIKES FROM USERS
 router.post(':id/like', sauceCtrl.likes);
