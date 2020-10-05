@@ -53,7 +53,17 @@ exports.deleteSauce = (req, res) => {
 };
 
 // CREATE NEW SAUCE IN DB
-exports.createSauce = () => { };
+exports.createSauce = (req, res, next) => {
+    const sauce = JSON.parse(req.body.sauce);
+    delete sauce._id;
+    const newSauce = new Sauce({
+      ...sauce,
+      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    });
+    newSauce.save()
+      .then(() => res.status(201).json({ message: 'New sauce created!' }))
+      .catch(error => res.status(400).json({ error }));
+  };
 
 // ADD LIKES OR DISLIKES FROM USERS
 exports.likes = () => { };
