@@ -33,7 +33,6 @@ exports.login = (req, res, next) => {
                         userId: user._id,
                         token: 'TOKEN'
                     });
-                    console.log(user);
                 })
                 .catch(error => res.status(500).json({ error }));
         })
