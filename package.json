@@ -1,6 +1,6 @@
 {
   "name": "p6_backend_openclassrooms",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "backend for project 6 openclassrooms fullstack",
   "main": "server.js",
   "scripts": {

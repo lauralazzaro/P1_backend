@@ -19,7 +19,7 @@ exports.getOneSauce = (req, res) => {
     ).then(
         (sauces) => { res.status(200).json(sauces); }
     ).catch(
-        (error) => res.status(400).json({ error: error }));
+        (error) => res.status(400).json({ error }));
 };
 
 // UDPDATE SAUCE ENTRY 
@@ -35,7 +35,7 @@ exports.updateSauce = (req, res) => {
     ).then(
         () => res.status(200).json({ message: 'Sauce updated!' })
     ).catch(
-        (error) => res.status(400).json({ error: error }));
+        (error) => res.status(400).json({ error }));
 };
 
 // DELETE ONE SAUCE
