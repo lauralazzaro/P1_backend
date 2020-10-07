@@ -1,6 +1,6 @@
 {
   "name": "p6_backend_openclassrooms",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "backend for project 6 openclassrooms fullstack",
   "main": "server.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.7",
+    "mongoose": "^5.10.8",
     "mongoose-unique-validator": "^2.0.3",
     "multer": "^1.4.2",
     "nodemon": "^2.0.4"
