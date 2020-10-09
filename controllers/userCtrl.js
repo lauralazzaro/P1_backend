@@ -1,6 +1,8 @@
 // handles signup and login for users
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv/config');
 
 // POST : /api/auth/signup 
 exports.signup = (req, res, next) => {
@@ -31,7 +33,11 @@ exports.login = (req, res, next) => {
                     }
                     res.status(200).json({
                         userId: user._id,
-                        token: 'TOKEN'
+                        token: jwt.sign(
+                            { userId: user._id },
+                            process.env.JWT_TOKEN,
+                            { expiresIn: '24h' }
+                        )
                     });
                 })
                 .catch(error => res.status(500).json({ error }));
