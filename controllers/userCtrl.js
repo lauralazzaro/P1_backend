@@ -2,14 +2,20 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 require('dotenv/config');
 
 // POST : /api/auth/signup 
 exports.signup = (req, res, next) => {
+
+    const emailCipher = crypto.createCipheriv('aes-256-cbc', process.env.USER_KEY, process.env.USER_IV);
+    const emailStr = emailCipher.update(req.body.email, 'utf8', 'hex') + emailCipher.final('hex');
+
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
+
             const user = new User({
-                email: req.body.email,
+                email: emailStr,
                 password: hash
             });
             user.save()
@@ -21,7 +27,13 @@ exports.signup = (req, res, next) => {
 
 // POST : /api/auth/login 
 exports.login = (req, res, next) => {
-    User.findOne({ email: req.body.email })
+    // const emailDecipher = crypto.createDecipheriv('aes-256-cbc', process.env.USER_KEY, process.env.USER_IV);
+    // const emailStr = emailDecipher.update(req.body.email, 'hex', 'utf8') + emailDecipher.final('utf8');
+
+    const emailCipher = crypto.createCipheriv('aes-256-cbc', process.env.USER_KEY, process.env.USER_IV);
+    const emailStr = emailCipher.update(req.body.email, 'utf8', 'hex') + emailCipher.final('hex');
+
+    User.findOne({ email: emailStr })
         .then(user => {
             if (!user) {
                 return res.status(401).json({ error });
