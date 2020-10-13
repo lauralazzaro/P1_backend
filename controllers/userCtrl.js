@@ -19,28 +19,26 @@ pwdCheck
 // POST : /api/auth/signup 
 exports.signup = (req, res, next) => {
 
-    if (pwdCheck.validate(req.body.password))
-        try {
-            const emailCipher = crypto.createCipheriv('aes-256-cbc', process.env.USER_KEY, process.env.USER_IV);
-            const emailStr = emailCipher.update(req.body.email, 'utf8', 'hex') + emailCipher.final('hex');
+    if (pwdCheck.validate(req.body.password)) {
+        const emailCipher = crypto.createCipheriv('aes-256-cbc', process.env.USER_KEY, process.env.USER_IV);
+        const emailStr = emailCipher.update(req.body.email, 'utf8', 'hex') + emailCipher.final('hex');
 
-            bcrypt.hash(req.body.password, 10)
-                .then(hash => {
+        bcrypt.hash(req.body.password, 10)
+            .then(hash => {
 
-                    const user = new User({
-                        email: emailStr,
-                        password: hash
-                    });
-                    user.save()
-                        .then(() => res.status(201).json({ message: 'User created!' }))
-                        .catch(error => res.status(400).json({ error }));
-                })
-                .catch(error => res.status(500).json({ error }));
+                const user = new User({
+                    email: emailStr,
+                    password: hash
+                });
+                user.save()
+                    .then(() => res.status(201).json({ message: 'User created!' }))
+                    .catch(error => res.status(400).json({ error }));
+            })
+            .catch(error => res.status(500).json({ error }));
 
-        } catch (error) {
-            res.status(500).json({ error });
-            next();
-        };
+    } else {
+        return false;
+    }
 
 };
 
