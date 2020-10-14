@@ -101,26 +101,23 @@ function addDislike(res, sauceId, userId) {
 }
 
 function updateLikes(res, sauceId, userId) {
-    Sauce.findById({ _id: sauceId })
-        .then((sauce) => {
-            if (sauce.usersLiked.includes(userId))
-                Sauce.updateOne(
-                    { _id: sauceId },
-                    {
-                        $inc: { likes: -1 },
-                        $pull: { usersLiked: userId }
-                    }
-                ).then(() => res.status(200).json({ message: 'updated!' })
-                ).catch((error) => res.status(400).json({ error }));
+    if (sauce.usersLiked.includes(userId))
+        Sauce.updateOne(
+            { _id: sauceId },
+            {
+                $inc: { likes: -1 },
+                $pull: { usersLiked: userId }
+            }
+        ).then(() => res.status(200).json({ message: 'updated!' })
+        ).catch((error) => res.status(400).json({ error }));
 
-            if (sauce.usersDisliked.includes(userId))
-                Sauce.updateOne(
-                    { _id: sauceId },
-                    {
-                        $inc: { dislikes: -1 },
-                        $pull: { usersDisliked: userId }
-                    }
-                ).then(() => res.status(200).json({ message: 'updated!' })
-                ).catch((error) => res.status(400).json({ error }));
-        }).catch((error) => res.status(400).json({ error }));
+    if (sauce.usersDisliked.includes(userId))
+        Sauce.updateOne(
+            { _id: sauceId },
+            {
+                $inc: { dislikes: -1 },
+                $pull: { usersDisliked: userId }
+            }
+        ).then(() => res.status(200).json({ message: 'updated!' })
+        ).catch((error) => res.status(400).json({ error }));
 }
