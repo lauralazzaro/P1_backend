@@ -34,8 +34,7 @@ exports.updateSauce = (req, res) => {
 exports.deleteSauce = (req, res) => {
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => {
-            const filename = sauce.imageUrl.split('/images/')[1];
-            fs.unlink(`images/${filename}`, () => {
+            fs.unlink(sauce.imageUrl, () => {
                 Sauce.deleteOne({ _id: req.params.id })
                     .then(() => res.status(200).json({ message: 'Sauce deleted!' }))
                     .catch(error => res.status(400).json({ error }));
