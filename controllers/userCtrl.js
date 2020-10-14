@@ -3,7 +3,18 @@ const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const passwordValidator = require('password-validator');
 require('dotenv/config');
+
+const pwdCheck = new passwordValidator();
+
+pwdCheck
+    .is().min(8)                                    // Minimum length 8
+    .is().max(100)                                  // Maximum length 100
+    .has().uppercase()                              // Must have uppercase letters
+    .has().lowercase()                              // Must have lowercase letters
+    .has().digits(2)                                // Must have at least 2 digits
+    .has().not().spaces();                           // Should not have spaces
 
 // POST : /api/auth/signup 
 exports.signup = (req, res, next) => {
@@ -18,9 +29,11 @@ exports.signup = (req, res, next) => {
                 email: emailStr,
                 password: hash
             });
-            user.save()
-                .then(() => res.status(201).json({ message: 'User created!' }))
-                .catch(error => res.status(400).json({ error }));
+            if (pwdCheck.validate(req.body.password)) {
+                user.save()
+                    .then(() => res.status(201).json({ message: 'User created!' }))
+                    .catch(error => res.status(400).json({ error }));
+            } else throw new error;
         })
         .catch(error => res.status(500).json({ error }));
 };
