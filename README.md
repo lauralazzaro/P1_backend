@@ -12,7 +12,7 @@
 
 # Overview
 
-Generate APIs with a Node.js server for website where users can evaluat hot spicy sauce.  
+Generate APIs with a Node.js server for website where users can evaluate hot spicy sauce.  
 
 <br/>
 
