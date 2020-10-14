@@ -15,8 +15,9 @@ mongoose.connect(process.env.DB_CONNECTION,
         useFindAndModify: false,
         useCreateIndex: true,
         autoIndex: true
-    })
+    })// eslint-disable-next-line no-console
     .then(() => console.log('Connected to DB!'))
+    // eslint-disable-next-line no-console
     .catch(() => console.log('Connection to DB failed!'));
 
 const app = express();
