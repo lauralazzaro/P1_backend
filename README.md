@@ -10,13 +10,13 @@
 
 <br/>
 
-# Overview
+## Overview
 
 Generate APIs with a Node.js server for website where users can evaluat hot spicy sauce.  
 
 <br/>
 
-# Download and installation
+## Download and installation
 
 Download the .zip file:
 
@@ -24,18 +24,12 @@ Download the .zip file:
 
 or clone it:
 
-```
-git clone lauralazzaro/P6_backend_openclassrooms
-```
+> git clone lauralazzaro/P6_backend_openclassrooms
 
 Then open the newly created folder with the console and type:
 
-```
-npm install
-```
+> npm install
 
 Run the server with:
 
-```
-nodemon start
-```
+> nodemon start
