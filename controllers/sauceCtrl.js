@@ -53,7 +53,7 @@ function updateLikes(res, sauceId, userId) {
 //SEARCH FOR ALL SAUCES IN DB
 exports.getAllSauces = (req, res) => {
     Sauce.find().then((sauces) => { res.status(200).json(sauces); }
-    ).catch((error) => { res.status(400).json({ error: error }); }
+    ).catch((error) => { res.status(400).json({ error }); }
     );
 };
 
@@ -87,7 +87,7 @@ exports.deleteSauce = (req, res) => {
                     .then(() => res.status(200).json({ message: 'Sauce deleted!' }))
                     .catch(error => res.status(400).json({ error }));
             });
-        }).catch(error => res.status(500).json({ error }));
+        }).catch((error) => res.status(500).json({ error }));
 };
 
 // CREATE NEW SAUCE IN DB
