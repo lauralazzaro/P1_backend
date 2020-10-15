@@ -25,7 +25,9 @@ function addDislike(res, sauceId, userId) {
 }
 
 function updateLikes(res, sauceId, userId) {
-    if (usersLiked.includes(userId))
+    const sauce = Sauce.findOne({ _id: sauceId });
+
+    if (sauce.usersLiked.includes(userId)) {
         Sauce.updateOne(
             { _id: sauceId },
             {
@@ -34,8 +36,9 @@ function updateLikes(res, sauceId, userId) {
             }
         ).then(() => res.status(200).json({ message: 'updated!' })
         ).catch((error) => res.status(400).json({ error }));
+    }
 
-    if (usersDisliked.includes(userId))
+    if (sauce.usersDisliked.includes(userId)) {
         Sauce.updateOne(
             { _id: sauceId },
             {
@@ -44,6 +47,7 @@ function updateLikes(res, sauceId, userId) {
             }
         ).then(() => res.status(200).json({ message: 'updated!' })
         ).catch((error) => res.status(400).json({ error }));
+    }
 }
 
 //SEARCH FOR ALL SAUCES IN DB
