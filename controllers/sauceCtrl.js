@@ -27,7 +27,7 @@ function addDislike(res, sauceId, userId) {
 function updateLikes(res, sauceId, userId) {
     Sauce.findById({ _id: sauceId })
         .then((sauce) => {
-            if (sauce.usersLiked.includes(userId))
+            if (sauce.usersLiked.includes(userId)) {
                 Sauce.updateOne(
                     { _id: sauceId },
                     {
@@ -36,8 +36,9 @@ function updateLikes(res, sauceId, userId) {
                     }
                 ).then(() => res.status(200).json({ message: 'updated!' })
                 ).catch((error) => res.status(400).json({ error }));
+            }
 
-            if (sauce.usersDisliked.includes(userId))
+            if (sauce.usersDisliked.includes(userId)) {
                 Sauce.updateOne(
                     { _id: sauceId },
                     {
@@ -46,6 +47,7 @@ function updateLikes(res, sauceId, userId) {
                     }
                 ).then(() => res.status(200).json({ message: 'updated!' })
                 ).catch((error) => res.status(400).json({ error }));
+            }
         }).catch((error) => res.status(400).json({ error }));
 }
 
@@ -81,7 +83,8 @@ exports.updateSauce = (req, res) => {
 exports.deleteSauce = (req, res) => {
     Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
-            fs.unlink(sauce.imageUrl, () => {
+            const filename = sauce.imageUrl.split('/images/')[1];
+            fs.unlink(`images/${filename}`, () => {
                 Sauce.deleteOne({ _id: req.params.id })
                     .then(() => res.status(200).json({ message: 'Sauce deleted!' }))
                     .catch(error => res.status(400).json({ error }));

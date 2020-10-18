@@ -16,7 +16,6 @@ pwdCheck
     .has().digits(2)                                // Must have at least 2 digits
     .has().not().spaces();                           // Should not have spaces
 
-// POST : /api/auth/signup 
 exports.signup = (req, res, next) => {
 
     const emailCipher = crypto.createCipheriv('aes-256-cbc', process.env.USER_KEY, process.env.USER_IV);
@@ -40,11 +39,7 @@ exports.signup = (req, res, next) => {
         .catch((error) => res.status(500).json({ error }));
 };
 
-// POST : /api/auth/login 
 exports.login = (req, res, next) => {
-    // const emailDecipher = crypto.createDecipheriv('aes-256-cbc', process.env.USER_KEY, process.env.USER_IV);
-    // const emailStr = emailDecipher.update(req.body.email, 'hex', 'utf8') + emailDecipher.final('utf8');
-
     const emailCipher = crypto.createCipheriv('aes-256-cbc', process.env.USER_KEY, process.env.USER_IV);
     const emailStr = emailCipher.update(req.body.email, 'utf8', 'hex') + emailCipher.final('hex');
 
