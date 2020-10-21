@@ -12,24 +12,19 @@
 
 ## Overview
 
-Generate APIs with a Node.js server for website where users can evaluate hot spicy sauce.  
+Generate APIs with a Node.js server for website where users can evaluate hot spicy sauces.  
 
 <br/>
 
 ## Download and installation
 
-Download the .zip file:
+#### For the OpenClassRooms evaluation:
+Rename the file "p2_02_.env" in .zip file I uploaded in ".env" and put it in the root folder
 
-[Link file .zip](https://github.com/lauralazzaro/P6_backend_openclassrooms/archive/master.zip) 
-
-or clone it:
-
-> git clone lauralazzaro/P6_backend_openclassrooms
-
-Then open the newly created folder with the console and type:
+Then install all necessary dependancies with:
 
 > npm install
 
-Run the server with:
+and run the the server with:
 
 > nodemon start
