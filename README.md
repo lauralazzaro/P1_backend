@@ -29,14 +29,13 @@ and run the the server with:
 
 > nodemon start
 
-
 ## Signup
 
 To create a new user, insert a valid email format (or even a valid email as it will be crypted and I will not have access to it) and a password with:
 
-- minimum length 8
-- maximum length 100
-- with uppercase letters
-- with lowercase letters
-- have two digits
-- have no space
+-  minimum length 8
+-  maximum length 100
+-  with uppercase letters
+-  with lowercase letters
+-  have two digits
+-  have no space
